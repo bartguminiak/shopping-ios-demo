@@ -52,8 +52,12 @@ class ShoppingListViewModel: ShoppingListViewControllerInputs, ShoppingListViewC
     }
 
     func checkout() {
-        var viewController = assembly.summaryViewController
-        viewController.cancel = { [weak self] in self?.viewControllerDismission?(viewController) }
+        let viewController = assembly.summaryViewController
+        viewController.cancel = { [weak self, weak viewController] in
+            if let viewController = viewController {
+                self?.viewControllerDismission?(viewController)
+            }
+        }
         let navigationController = assembly.navigationController(with: viewController)
         viewControllerPresentation?(navigationController)
     }

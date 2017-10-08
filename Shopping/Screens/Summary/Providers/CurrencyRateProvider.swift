@@ -10,9 +10,9 @@ import Foundation
 
 class CurrencyRateProvider: CurrencyRateProviding {
 
-    // TODO: inject via protocol
-    let defaultSession = URLSession(configuration: .default)
-    var dataTask: URLSessionDataTask?
+    init(quotes: [String] = ["EUR", "GBP", "CAD", "PLN", "CHF", "NOK"]) {
+        self.quotes = quotes
+    }
 
     // MARK: - CurrencyRateProviding
 
@@ -20,7 +20,6 @@ class CurrencyRateProvider: CurrencyRateProviding {
         dataTask?.cancel()
         self.completion = completion
 
-        // TODO: refactor
         if var urlComponents = URLComponents(string: currencyRatesUrl) {
             urlComponents.query = query
             guard let url = urlComponents.url else { return }
@@ -38,7 +37,10 @@ class CurrencyRateProvider: CurrencyRateProviding {
                     } catch {
                         self.returnOnMainThread([], error)
                     }
-                } else { self.returnOnMainThread([], NSError()) }
+                } else {
+                    self.returnOnMainThread([], NSError(domain: "pl.guminiak.currency_response_unknown_error",
+                                                          code: 0,
+                                                      userInfo: nil)) }
             }
             dataTask?.resume()
         }
@@ -46,13 +48,20 @@ class CurrencyRateProvider: CurrencyRateProviding {
 
     // MARK: - Privates
 
+    private let defaultSession = URLSession(configuration: .default)
+    private var dataTask: URLSessionDataTask?
+    private let decoder = JSONDecoder()
+
     private let currencyRatesUrl = "http://apilayer.net/api/live"
-    private let query = "access_key=dcd7e0723d29d5a1a7a8c795fa5efe4c&currencies=EUR,GBP,CAD,PLN&source=USD&format=1"
+    private var query: String {
+        let quotesString = quotes.reduce("", { $0 + "," + $1 })
+        return "access_key=dcd7e0723d29d5a1a7a8c795fa5efe4c&currencies=\(quotesString)&source=USD&format=1"
+    }
+    private let quotes: [String]
 
     private var completion: (([Currency], Error?) -> Void)?
 
     private func currencyRates(from data: Data) throws -> [Currency] {
-        let decoder = JSONDecoder()
         let currencyResponse = try decoder.decode(CurrencyResponse.self, from: data)
         return currencyResponse.quotes.map { Currency(name: $0.key, rate: $0.value) }
     }

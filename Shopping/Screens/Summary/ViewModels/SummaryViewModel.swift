@@ -38,8 +38,8 @@ class SummaryViewModel: SummaryViewControllerInputs, SummaryViewControllerOutput
     // MARK: - SummaryViewControllerOutputs
 
     func select(row: Int) {
-        guard storedCurrencyRates.indices.contains(row) else { return }
-        let currency = storedCurrencyRates[row]
+        guard storedCurrencies.indices.contains(row) else { return }
+        let currency = storedCurrencies[row]
         summaryPrice = summaryPrice(with: currency)
         updateSummaryPrice?(summaryPrice)
     }
@@ -49,13 +49,13 @@ class SummaryViewModel: SummaryViewControllerInputs, SummaryViewControllerOutput
     private let basket: BasketOperating
     private let provider: CurrencyRateProviding
 
-    private var storedCurrencyRates = [Currency]()
+    private var storedCurrencies = [Currency]()
 
     private func updateRates() {
         self.provider.getCurrencies(completion: { [weak self] currencyRates, error in
             if let error = error { print(error) }
             else {
-                self?.storedCurrencyRates = currencyRates
+                self?.storedCurrencies = currencyRates
                 self?.currencyRates = currencyRates.map { "\($0.name) at rate \($0.rate)" }
                 self?.reload?()
             }
@@ -64,7 +64,9 @@ class SummaryViewModel: SummaryViewControllerInputs, SummaryViewControllerOutput
 
     private func summaryPrice(with currency: Currency? = nil) -> String {
         guard let currency = currency else { return "Your price is \(basket.totalPriceInUSD) USD" }
-        return "Your price is \(basket.totalPriceInUSD * currency.rate) \(currency.name.suffix(3))"
+        let price = (basket.totalPriceInUSD * currency.rate).round(to: 2)
+        let quote = currency.name.suffix(3)
+        return "Your price is \(price) \(quote)"
     }
     
 }

@@ -17,7 +17,7 @@ class CounterView: UIView {
 
     weak var delegate: CounterViewDelegate?
 
-    var count: Int { didSet { updateCountLabel() }}
+    var count: Int { didSet { countLabel.text = "\(count)"}}
 
     init(initialCount: Int) {
         self.count = initialCount
@@ -58,23 +58,14 @@ class CounterView: UIView {
     }
 
     private func configureSubviews() {
-        minusButton.addTarget(self, action: #selector(minusAction), for: .touchUpInside)
-        plusButton.addTarget(self, action: #selector(plusAction), for: .touchUpInside)
-        updateCountLabel()
-    }
-
-    // MARK: Actions
-
-    @objc func plusAction() {
-        delegate?.counterViewDidIncrease(inView: self)
-    }
-
-    @objc func minusAction() {
-        delegate?.counterViewDidDecrease(inView: self)
-    }
-
-    private func updateCountLabel() {
-        countLabel.text = "\(count)"
+        minusButton.addAction(for: .touchUpInside) { [weak self] in
+            guard let `self` = self else { return }
+            self.delegate?.counterViewDidDecrease(inView: self)
+        }
+        plusButton.addAction(for: .touchUpInside) { [weak self] in
+            guard let `self` = self else { return }
+            self.delegate?.counterViewDidIncrease(inView: self)
+        }
     }
 
 }

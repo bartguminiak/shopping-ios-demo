@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ShoppingIntegrationTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>ShoppingTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>06ACCED71F84198B00538ECD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>06AFDC0F1F88FE2D0052E471</key>
 		<dict>
 			<key>primary</key>
 			<true/>

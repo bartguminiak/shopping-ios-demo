@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SummaryViewControllerDismission {
+protocol SummaryViewControllerDismission: class {
     var cancel: (() -> Void)? { get set }
 }
 
@@ -80,7 +80,10 @@ class SummaryViewController: UIViewController, SummaryViewControllerDismission, 
     }
 
     private func configureCancel() {
-        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        cancelItem.addAction { [weak self] in
+            self?.cancel?()
+        }
         navigationItem.leftBarButtonItem = cancelItem
     }
 
@@ -98,12 +101,6 @@ class SummaryViewController: UIViewController, SummaryViewControllerDismission, 
     private func configureSummaryLabel() {
         summaryView.summaryLabel.text = viewModel.summaryPrice
         viewModel.updateSummaryPrice = { [weak self] text in self?.summaryView.summaryLabel.text = text }
-    }
-
-    // MARK: Cancel action
-
-    @objc func cancelAction() {
-        cancel?()
     }
 
 }

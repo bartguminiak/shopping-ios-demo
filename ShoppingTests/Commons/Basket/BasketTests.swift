@@ -67,6 +67,11 @@ class BasketTests: XCTestCase {
         XCTAssert(sut.purchasedItemCount(of: .milk) == 1) 
     }
 
+    func testRemovingFromEmptyBasket() {
+        sut.remove(item: Item(type: .milk))
+        XCTAssert(true)
+    }
+
     func testSummingUpItems() {
         addVariousItems()
         XCTAssert(sut.totalPriceInUSD == 8.48)

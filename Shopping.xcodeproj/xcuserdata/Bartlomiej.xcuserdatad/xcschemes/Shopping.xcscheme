@@ -27,7 +27,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -36,6 +37,16 @@
                BlueprintIdentifier = "06ACCED71F84198B00538ECD"
                BuildableName = "ShoppingTests.xctest"
                BlueprintName = "ShoppingTests"
+               ReferencedContainer = "container:Shopping.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "06AFDC0F1F88FE2D0052E471"
+               BuildableName = "ShoppingIntegrationTests.xctest"
+               BlueprintName = "ShoppingIntegrationTests"
                ReferencedContainer = "container:Shopping.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -77,7 +88,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"

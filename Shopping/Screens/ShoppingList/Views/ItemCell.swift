@@ -33,7 +33,6 @@ class ItemCell: UITableViewCell, CounterViewDelegate {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
         cleanUp()
     }
 
