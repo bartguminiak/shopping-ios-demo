@@ -10,29 +10,19 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "06ACCED71F84198B00538ECD"
-               BuildableName = "ShoppingTests.xctest"
-               BlueprintName = "ShoppingTests"
+               BlueprintIdentifier = "06AFDC0F1F88FE2D0052E471"
+               BuildableName = "ShoppingIntegrationTests.xctest"
+               BlueprintName = "ShoppingIntegrationTests"
                ReferencedContainer = "container:Shopping.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "06ACCEC31F84198B00538ECD"
-            BuildableName = "Shopping.app"
-            BlueprintName = "Shopping"
-            ReferencedContainer = "container:Shopping.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -46,16 +36,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "06ACCEC31F84198B00538ECD"
-            BuildableName = "Shopping.app"
-            BlueprintName = "Shopping"
-            ReferencedContainer = "container:Shopping.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

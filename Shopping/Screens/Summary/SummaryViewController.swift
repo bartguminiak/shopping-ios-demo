@@ -76,7 +76,7 @@ class SummaryViewController: UIViewController, SummaryViewControllerDismission, 
     private let reuseCellId = "itemCellId"
     
     private var summaryView: SummaryView! {
-        return view as! SummaryView
+        return view as? SummaryView
     }
 
     private func configureCancel() {

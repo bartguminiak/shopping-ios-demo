@@ -10,7 +10,7 @@ import UIKit
 
 extension UIControl {
 
-    func addAction(for controlEvents: UIControlEvents, action: @escaping () -> Void) {
+    func addAction(for controlEvents: UIControl.Event, action: @escaping () -> Void) {
         let sleeve = ClosureSleeve(attachTo: self, closure: action)
         addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
     }

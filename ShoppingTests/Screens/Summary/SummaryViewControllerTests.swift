@@ -21,7 +21,7 @@ class SummaryViewControllerTests: XCTestCase {
         viewModelDouble.summaryTitleStub = "test title"
         viewModelDouble.summaryPriceStub = "test price"
         sut = SummaryViewController(viewModel: viewModelDouble)
-        summaryView = sut.view as! SummaryView
+        summaryView = sut.view as? SummaryView
     }
 
     override func tearDown() {

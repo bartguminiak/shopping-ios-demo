@@ -95,7 +95,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, ItemC
     private let reuseCellId = "itemCellId"
 
     private var shoppingListView: ShoppingListView! {
-        return view as! ShoppingListView
+        return view as? ShoppingListView
     }
 
     private func configureTableView() {

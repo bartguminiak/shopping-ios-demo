@@ -12,7 +12,9 @@ xcov_output/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata/
+.idea/
+*.hmap
+xcuserdata/*
 
 ## Other
 *.moved-aside

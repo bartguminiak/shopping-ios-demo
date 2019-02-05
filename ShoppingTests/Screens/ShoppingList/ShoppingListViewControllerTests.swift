@@ -22,7 +22,7 @@ class ShoppingListViewControllerTests: XCTestCase {
         viewModelDouble = ShoppingViewModelDouble()
 
         sut = ShoppingListViewController(assembly: assemblyDouble, viewModel: viewModelDouble)
-        shoppingListView = sut.view as! ShoppingListView
+        shoppingListView = sut.view as? ShoppingListView
     }
 
     override func tearDown() {
