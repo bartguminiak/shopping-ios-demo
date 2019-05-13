@@ -73,16 +73,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, ItemC
 
     // MARK: - ItemCellDelegate
 
-    func counterViewDidIncrease(inCell cell: ItemCell) {
+    func counterView(did change: CounterView.Change, in cell: ItemCell) {
         guard let cellIndexPath = shoppingListView.tableView.indexPath(for: cell) else { return }
         let type = viewModel.itemTypes[cellIndexPath.row]
-        viewModel.add(type)
-    }
-
-    func counterViewDidDecrease(inCell cell: ItemCell) {
-        guard let cellIndexPath = shoppingListView.tableView.indexPath(for: cell) else { return }
-        let type = viewModel.itemTypes[cellIndexPath.row]
-        viewModel.remove(type)
+        switch change {
+        case .increase:
+            viewModel.add(type)
+        case .decrease:
+            viewModel.remove(type)
+        }
     }
 
     // MARK: - Privates

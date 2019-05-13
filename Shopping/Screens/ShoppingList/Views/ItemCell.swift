@@ -9,8 +9,7 @@
 import UIKit
 
 protocol ItemCellDelegate: class {
-    func counterViewDidIncrease(inCell cell: ItemCell)
-    func counterViewDidDecrease(inCell cell: ItemCell)
+    func counterView(did change: CounterView.Change, in cell: ItemCell)
 }
 
 class ItemCell: UITableViewCell, CounterViewDelegate {
@@ -38,12 +37,8 @@ class ItemCell: UITableViewCell, CounterViewDelegate {
 
     // MARK: - CounterViewDelegate
 
-    func counterViewDidIncrease(inView view: CounterView) {
-        delegate?.counterViewDidIncrease(inCell: self)
-    }
-
-    func counterViewDidDecrease(inView view: CounterView) {
-        delegate?.counterViewDidDecrease(inCell: self)
+    func counterView(did change: CounterView.Change, inView view: CounterView) {
+        delegate?.counterView(did: change, in: self)
     }
 
     // MARK: - Privates

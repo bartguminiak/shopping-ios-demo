@@ -9,11 +9,14 @@
 import UIKit
 
 protocol CounterViewDelegate: class {
-    func counterViewDidIncrease(inView view: CounterView)
-    func counterViewDidDecrease(inView view: CounterView)
+    func counterView(did change: CounterView.Change, inView view: CounterView)
 }
 
 class CounterView: UIView {
+
+    enum Change {
+        case increase, decrease
+    }
 
     weak var delegate: CounterViewDelegate?
 
@@ -60,11 +63,11 @@ class CounterView: UIView {
     private func configureSubviews() {
         minusButton.addAction(for: .touchUpInside) { [weak self] in
             guard let `self` = self else { return }
-            self.delegate?.counterViewDidDecrease(inView: self)
+            self.delegate?.counterView(did: .decrease, inView: self)
         }
         plusButton.addAction(for: .touchUpInside) { [weak self] in
             guard let `self` = self else { return }
-            self.delegate?.counterViewDidIncrease(inView: self)
+            self.delegate?.counterView(did: .increase, inView: self)
         }
     }
 
@@ -75,12 +78,7 @@ private extension CounterView {
     struct Factory {
 
         static func minusButton() -> UIButton {
-            let button = UIButton(type: .custom)
-            button.setTitle("-", for: .normal)
-            button.setTitleColor(.red, for: .normal)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 26)
-            return button
+            return button("-")
         }
 
         static func countLabel() -> UILabel {
@@ -92,8 +90,12 @@ private extension CounterView {
         }
 
         static func plusButton() -> UIButton {
+            return button("+")
+        }
+
+        private static func button(_ title: String) -> UIButton {
             let button = UIButton(type: .custom)
-            button.setTitle("+", for: .normal)
+            button.setTitle(title, for: .normal)
             button.setTitleColor(.red, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.titleLabel?.font = UIFont.systemFont(ofSize: 26)
