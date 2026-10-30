@@ -9,8 +9,7 @@
 import UIKit
 
 protocol ItemCellDelegate: class {
-    func counterViewDidIncrease(inCell cell: ItemCell)
-    func counterViewDidDecrease(inCell cell: ItemCell)
+    func counterView(did change: CounterView.Change, in cell: ItemCell)
 }
 
 class ItemCell: UITableViewCell, CounterViewDelegate {
@@ -21,7 +20,7 @@ class ItemCell: UITableViewCell, CounterViewDelegate {
         delegate = updateListeiner
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureSelf()
         addSubviews()
@@ -33,18 +32,13 @@ class ItemCell: UITableViewCell, CounterViewDelegate {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
         cleanUp()
     }
 
     // MARK: - CounterViewDelegate
 
-    func counterViewDidIncrease(inView view: CounterView) {
-        delegate?.counterViewDidIncrease(inCell: self)
-    }
-
-    func counterViewDidDecrease(inView view: CounterView) {
-        delegate?.counterViewDidDecrease(inCell: self)
+    func counterView(did change: CounterView.Change, inView view: CounterView) {
+        delegate?.counterView(did: change, in: self)
     }
 
     // MARK: - Privates
@@ -73,8 +67,8 @@ class ItemCell: UITableViewCell, CounterViewDelegate {
 
         counterView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         counterView.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
-        counterView.widthAnchor.constraint(equalToConstant: 100.0)
-        counterView.heightAnchor.constraint(equalToConstant: 40)
+        counterView.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        counterView.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
     private func configureCounterView() {

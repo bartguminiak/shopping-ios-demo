@@ -9,15 +9,18 @@
 import UIKit
 
 protocol CounterViewDelegate: class {
-    func counterViewDidIncrease(inView view: CounterView)
-    func counterViewDidDecrease(inView view: CounterView)
+    func counterView(did change: CounterView.Change, inView view: CounterView)
 }
 
 class CounterView: UIView {
 
+    enum Change {
+        case increase, decrease
+    }
+
     weak var delegate: CounterViewDelegate?
 
-    var count: Int { didSet { updateCountLabel() }}
+    var count: Int { didSet { countLabel.text = "\(count)"}}
 
     init(initialCount: Int) {
         self.count = initialCount
@@ -58,23 +61,14 @@ class CounterView: UIView {
     }
 
     private func configureSubviews() {
-        minusButton.addTarget(self, action: #selector(minusAction), for: .touchUpInside)
-        plusButton.addTarget(self, action: #selector(plusAction), for: .touchUpInside)
-        updateCountLabel()
-    }
-
-    // MARK: Actions
-
-    @objc func plusAction() {
-        delegate?.counterViewDidIncrease(inView: self)
-    }
-
-    @objc func minusAction() {
-        delegate?.counterViewDidDecrease(inView: self)
-    }
-
-    private func updateCountLabel() {
-        countLabel.text = "\(count)"
+        minusButton.addAction(for: .touchUpInside) { [weak self] in
+            guard let `self` = self else { return }
+            self.delegate?.counterView(did: .decrease, inView: self)
+        }
+        plusButton.addAction(for: .touchUpInside) { [weak self] in
+            guard let `self` = self else { return }
+            self.delegate?.counterView(did: .increase, inView: self)
+        }
     }
 
 }
@@ -84,12 +78,7 @@ private extension CounterView {
     struct Factory {
 
         static func minusButton() -> UIButton {
-            let button = UIButton(type: .custom)
-            button.setTitle("-", for: .normal)
-            button.setTitleColor(.red, for: .normal)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 26)
-            return button
+            return button("-")
         }
 
         static func countLabel() -> UILabel {
@@ -101,8 +90,12 @@ private extension CounterView {
         }
 
         static func plusButton() -> UIButton {
+            return button("+")
+        }
+
+        private static func button(_ title: String) -> UIButton {
             let button = UIButton(type: .custom)
-            button.setTitle("+", for: .normal)
+            button.setTitle(title, for: .normal)
             button.setTitleColor(.red, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.titleLabel?.font = UIFont.systemFont(ofSize: 26)

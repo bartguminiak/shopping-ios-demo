@@ -19,9 +19,9 @@ extension Container {
         let container: Container
 
         // MARK: - AppDelegateAssembly
-
-        var window: UIWindow {
-            return UIWindow(frame: UIScreen.main.bounds)
+        
+        func makeWindow(in windowScene: UIWindowScene) -> UIWindow {
+            UIWindow(windowScene: windowScene)
         }
 
         var rootViewController: UIViewController {

@@ -73,16 +73,15 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, ItemC
 
     // MARK: - ItemCellDelegate
 
-    func counterViewDidIncrease(inCell cell: ItemCell) {
+    func counterView(did change: CounterView.Change, in cell: ItemCell) {
         guard let cellIndexPath = shoppingListView.tableView.indexPath(for: cell) else { return }
         let type = viewModel.itemTypes[cellIndexPath.row]
-        viewModel.add(type)
-    }
-
-    func counterViewDidDecrease(inCell cell: ItemCell) {
-        guard let cellIndexPath = shoppingListView.tableView.indexPath(for: cell) else { return }
-        let type = viewModel.itemTypes[cellIndexPath.row]
-        viewModel.remove(type)
+        switch change {
+        case .increase:
+            viewModel.add(type)
+        case .decrease:
+            viewModel.remove(type)
+        }
     }
 
     // MARK: - Privates
@@ -95,7 +94,7 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, ItemC
     private let reuseCellId = "itemCellId"
 
     private var shoppingListView: ShoppingListView! {
-        return view as! ShoppingListView
+        return view as? ShoppingListView
     }
 
     private func configureTableView() {
@@ -106,7 +105,9 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, ItemC
     }
 
     private func configureCheckoutButton() {
-        shoppingListView.checkoutButton.addTarget(self, action: #selector(checkoutAction), for: .touchUpInside)
+        shoppingListView.checkoutButton.addAction(for: .touchUpInside) { [weak self] in
+            self?.viewModel.checkout()
+        }
     }
 
     private func configureViewControllerPresentation() {
@@ -118,12 +119,6 @@ class ShoppingListViewController: UIViewController, UITableViewDataSource, ItemC
         viewModel.viewControllerDismission = { [weak self] viewController in
             self?.presenter.dismiss(viewController: viewController)
         }
-    }
-
-    // MARK: - Checkout action
-
-    @objc func checkoutAction() {
-        viewModel.checkout()
     }
 
 }
