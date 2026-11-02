@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		060355FE3094ED2800C3D9D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060355FD3094ED2100C3D9D0 /* SceneDelegate.swift */; };
+		060A3B793098C83100CCC057 /* CurrencyRateProviderCallbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A3B783098C83100CCC057 /* CurrencyRateProviderCallbackTests.swift */; };
 		063511921F85732600DD07A9 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063511911F85732600DD07A9 /* ItemCell.swift */; };
 		063511941F85734E00DD07A9 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063511931F85734E00DD07A9 /* CounterView.swift */; };
 		063511961F8578CA00DD07A9 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063511951F8578CA00DD07A9 /* ItemViewModel.swift */; };
@@ -83,6 +84,7 @@
 
 /* Begin PBXFileReference section */
 		060355FD3094ED2100C3D9D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		060A3B783098C83100CCC057 /* CurrencyRateProviderCallbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateProviderCallbackTests.swift; sourceTree = "<group>"; };
 		063511911F85732600DD07A9 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		063511931F85734E00DD07A9 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		063511951F8578CA00DD07A9 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				06AFDC271F8970DF0052E471 /* CurrencyRateProviderDouble.swift */,
+				060A3B783098C83100CCC057 /* CurrencyRateProviderCallbackTests.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				06AFDC0B1F88F7F60052E471 /* ViewControllerPresenterTests.swift in Sources */,
 				06ACCEDD1F84198B00538ECD /* BasketTests.swift in Sources */,
 				0646E3551F86706D00B2A0FA /* ShoppingListViewModelTests.swift in Sources */,
+				060A3B793098C83100CCC057 /* CurrencyRateProviderCallbackTests.swift in Sources */,
 				06D04C621F861B5800F3C2D2 /* ShoppingListViewControllerAssemblyDouble.swift in Sources */,
 				06AFDC1D1F8942780052E471 /* SummaryViewModelDouble.swift in Sources */,
 				06AFDC281F8970DF0052E471 /* CurrencyRateProviderDouble.swift in Sources */,
