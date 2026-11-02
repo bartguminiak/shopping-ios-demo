@@ -4,16 +4,6 @@ A native iOS shopping app built with Swift and UIKit, demonstrating MVVM, separa
 
 The app lets users browse a predefined product list, manage quantities in a shopping basket, view the order summary, and convert the total price from USD to other currencies using live exchange rates.
 
-## Screenshots
-
-### Shopping list
-
-![Shopping list](Screenshot_main_page.png)
-
-### Checkout and summary
-
-![Checkout](Screenshot_checkout.png)
-
 ## Features
 
 - Browse a predefined catalogue of products.
@@ -49,6 +39,16 @@ The unit tests use test doubles, including stubs and spies, to isolate the compo
 The integration tests verify the currency provider against actual API responses, including successful currency retrieval and handling of an invalid currency request.
 
 **Note:** Integration tests require a valid APILayer API key and an API subscription that supports the requested endpoint and currencies. They will not pass without valid API credentials and a working API response. Unit tests do not require an API key.
+
+## Screenshots
+
+### Shopping list
+
+<img src="Screenshot_main_page.png" alt="Shopping list" width="40%">
+
+### Checkout and summary
+
+<img src="Screenshot_checkout.png" alt="Checkout" width="40%">
 
 ## Requirements
 
